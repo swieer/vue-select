@@ -811,7 +811,7 @@
        */
       select(option, index) {
         this.typeAheadPointer = index;
-        if (!this.isOptionSelected(option)) {
+        // if (!this.isOptionSelected(option)) {
           if (this.taggable && !this.optionExists(option)) {
             option = this.createOption(option)
           }
@@ -831,7 +831,7 @@
           } else {
             this.mutableValue = option
           }
-        }
+        // }
 
         this.onAfterSelect(option)
       },

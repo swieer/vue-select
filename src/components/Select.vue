@@ -872,7 +872,7 @@
       onAfterSelect(option) {
         if (this.closeOnSelect) {
           this.open = !this.open
-          this.$refs.search.blur()
+          // this.$refs.search.blur()
         }
 
         if (this.clearSearchOnSelect) {
@@ -889,11 +889,11 @@
         if (e.target === this.$refs.openIndicator || e.target === this.$refs.search || e.target === this.$refs.toggle ||
             e.target.classList.contains('selected-tag') || e.target === this.$el) {
           if (this.open) {
-            this.$refs.search.blur() // dropdown will close on blur
+            // this.$refs.search.blur() // dropdown will close on blur
           } else {
             if (!this.disabled) {
               this.open = true
-              this.$refs.search.focus()
+              // this.$refs.search.focus()
             }
           }
         }
@@ -977,7 +977,7 @@
             this.search = ''
           }
           this.open = false
-          this.$emit('search:blur')
+          // this.$emit('search:blur')
         }
       },
 

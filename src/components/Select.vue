@@ -821,7 +821,7 @@
       onAfterSelect(option) {
         if (this.closeOnSelect) {
           this.open = !this.open
-          this.$refs.search.blur()
+          // this.$refs.search.blur()
         }
         if (this.clearSearchOnSelect) {
           this.search = ''

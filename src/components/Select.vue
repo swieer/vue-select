@@ -9,6 +9,7 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
+
   /* Rtl support - Because we're using a flexbox-based layout, the `dir="rtl"` HTML
      attribute does most of the work for us by rearranging the child elements visually.
    */
@@ -26,6 +27,7 @@
   .v-select[dir="rtl"] .dropdown-menu {
     text-align: right;
   }
+
   /* Open Indicator */
   .v-select .open-indicator {
     display: flex;
@@ -58,6 +60,7 @@
   .v-select.loading .open-indicator {
     opacity: 0;
   }
+
   /* Dropdown Toggle */
   .v-select .dropdown-toggle {
     -webkit-appearance: none;
@@ -83,6 +86,7 @@
     align-items: stretch;
     padding: 0 6px 0 3px;
   }
+
   /* Clear Button */
   .v-select .dropdown-toggle .clear {
     font-size: 23px;
@@ -95,6 +99,7 @@
     cursor: pointer;
     margin-right: 6px;
   }
+
   /* Dropdown Toggle States */
   .v-select.searchable .dropdown-toggle {
     cursor: text;
@@ -207,6 +212,7 @@
   .v-select.unsearchable input[type="search"]:hover {
     cursor: pointer;
   }
+
   /* List Items */
   .v-select li {
     line-height: 1.42857143; /* Normalize line height */
@@ -257,6 +263,7 @@
     width: 5em;
     height: 5em;
   }
+
   /* Disabled state */
   .v-select.disabled .dropdown-toggle,
   .v-select.disabled .dropdown-toggle .clear,
@@ -266,6 +273,7 @@
     cursor: not-allowed;
     background-color: rgb(248, 248, 248);
   }
+
   /* Loading Spinner States */
   .v-select.loading .spinner {
     opacity: 1;
@@ -300,7 +308,7 @@
 
 <template>
   <div :dir="dir" class="dropdown v-select" :class="dropdownClasses">
-    <div ref="toggle" @mousedown.prevent="toggleDropdown" class="dropdown-toggle">
+    <div ref="toggle" @click="toggleDropdown" class="dropdown-toggle">
 
       <div class="vs__selected-options" ref="selectedOptions">
         <slot v-for="option in valueAsArray" name="selected-option-container"
@@ -381,8 +389,10 @@
   import pointerScroll from '../mixins/pointerScroll'
   import typeAheadPointer from '../mixins/typeAheadPointer'
   import ajax from '../mixins/ajax'
+
   export default {
     mixins: [pointerScroll, typeAheadPointer, ajax],
+
     props: {
       /**
        * Contains the currently selected value. Very similar to a
@@ -393,6 +403,7 @@
       value: {
         default: null
       },
+
       /**
        * An array of strings or objects to be used as dropdown choices.
        * If you are using an array of objects, vue-select will look for
@@ -406,6 +417,7 @@
           return []
         },
       },
+
       /**
        * Disable the entire component.
        * @type {Boolean}
@@ -414,6 +426,7 @@
         type: Boolean,
         default: false
       },
+
       /**
        * Can the user clear the selected property.
        * @type {Boolean}
@@ -422,6 +435,7 @@
         type: Boolean,
         default: true
       },
+
       /**
        * Sets the max-height property on the dropdown list.
        * @deprecated
@@ -431,6 +445,7 @@
         type: String,
         default: '400px'
       },
+
       /**
        * Enable/disable filtering the options.
        * @type {Boolean}
@@ -439,6 +454,7 @@
         type: Boolean,
         default: true
       },
+
       /**
        * Equivalent to the `multiple` attribute on a `<select>` input.
        * @type {Boolean}
@@ -447,6 +463,7 @@
         type: Boolean,
         default: false
       },
+
       /**
        * Equivalent to the `placeholder` attribute on an `<input>`.
        * @type {String}
@@ -455,6 +472,7 @@
         type: String,
         default: ''
       },
+
       /**
        * Sets a Vue transition property on the `.dropdown-menu`. vue-select
        * does not include CSS for transitions, you'll need to add them yourself.
@@ -464,6 +482,7 @@
         type: String,
         default: 'fade'
       },
+
       /**
        * Enables/disables clearing the search text when an option is selected.
        * @type {Boolean}
@@ -472,6 +491,7 @@
         type: Boolean,
         default: true
       },
+
       /**
        * Close a dropdown when an option is chosen. Set to false to keep the dropdown
        * open (useful when combined with multi-select, for example)
@@ -481,6 +501,7 @@
         type: Boolean,
         default: true
       },
+
       /**
        * Tells vue-select what key to use when generating option
        * labels when each `option` is an object.
@@ -490,6 +511,7 @@
         type: String,
         default: 'label'
       },
+
       /**
        * Tells vue-select what key to use when generating option
        * values when each `option` is an object.
@@ -499,6 +521,7 @@
         type: String,
         default: null
       },
+
       /**
        * Callback to generate the label text. If {option}
        * is an object, returns option[this.label] by default.
@@ -518,6 +541,7 @@
           if( this.index ) {
             option = this.findOptionByIndexValue(option)
           }
+
           if (typeof option === 'object') {
             if (!option.hasOwnProperty(this.label)) {
               return console.warn(
@@ -531,6 +555,7 @@
           return option;
         }
       },
+
       /**
        * An optional callback function that is called each time the selected
        * value(s) change. When integrating with Vuex, use this callback to trigger
@@ -544,6 +569,7 @@
           this.$emit('input', val)
         }
       },
+
       /**
        * Select the current value if selectOnTab is enabled
        */
@@ -555,6 +581,7 @@
           }
         },
       },
+
       /**
        * Enable/disable creating options from searchInput.
        * @type {Boolean}
@@ -563,6 +590,7 @@
         type: Boolean,
         default: false
       },
+
       /**
        * Set the tabindex for the input field.
        * @type {Number}
@@ -571,6 +599,7 @@
         type: Number,
         default: null
       },
+
       /**
        * When true, newly created tags will be added to
        * the options list.
@@ -580,6 +609,7 @@
         type: Boolean,
         default: false
       },
+
       /**
        * When true, existing options will be filtered
        * by the search text. Should not be used in conjunction
@@ -590,6 +620,7 @@
         type: Boolean,
         default: true
       },
+
       /**
        * Callback to determine if the provided option should
        * match the current search text. Used to determine
@@ -606,6 +637,7 @@
           return (label || '').toLowerCase().indexOf(search.toLowerCase()) > -1
         }
       },
+
       /**
        * Callback to filter results when search text
        * is provided. Default implementation loops
@@ -629,6 +661,7 @@
           });
         }
       },
+
       /**
        * User defined function for adding Options
        * @type {Function}
@@ -643,6 +676,7 @@
           return newOption
         }
       },
+
       /**
        * When false, updating the options will not reset the select value
        * @type {Boolean}
@@ -651,6 +685,7 @@
         type: Boolean,
         default: false
       },
+
       /**
        * Disable the dropdown entirely.
        * @type {Boolean}
@@ -659,6 +694,7 @@
         type: Boolean,
         default: false
       },
+
       /**
        * Sets the id of the input element.
        * @type {String}
@@ -667,6 +703,7 @@
       inputId: {
         type: String
       },
+
       /**
        * Sets RTL support. Accepts 'ltr', 'rtl', 'auto'.
        * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir
@@ -686,6 +723,7 @@
         default: false
       }
     },
+
     data() {
       return {
         search: '',
@@ -694,6 +732,7 @@
         mutableOptions: []
       }
     },
+
     watch: {
       /**
        * When the value prop changes, update
@@ -704,6 +743,7 @@
       value(val) {
         this.mutableValue = val
       },
+
       /**
        * Maybe run the onChange callback.
        * @param  {string|object} val
@@ -717,6 +757,7 @@
           this.onChange && val !== old ? this.onChange(val) : null
         }
       },
+
       /**
        * When options change, update
        * the internal mutableOptions.
@@ -726,6 +767,7 @@
       options(val) {
         this.mutableOptions = val
       },
+
       /**
        * Maybe reset the mutableValue
        * when mutableOptions change.
@@ -736,6 +778,7 @@
           this.mutableValue = this.multiple ? [] : null
         }
       },
+
       /**
        * Always reset the mutableValue when
        * the multiple prop changes.
@@ -746,6 +789,7 @@
         this.mutableValue = val ? [] : null
       }
     },
+
     /**
      * Clone props into mutable values,
      * attach any event listeners.
@@ -754,17 +798,20 @@
       this.mutableValue = this.value
       this.mutableOptions = this.options.slice(0)
       this.mutableLoading = this.loading
+
       this.$on('option:created', this.maybePushTag)
     },
+
     methods: {
+
       /**
        * Select a given option.
        * @param  {Object|String} option
        * @return {void}
        */
-      select(option,index) {
+      select(option, index) {
         this.typeAheadPointer = index;
-        if (!this.isOptionSelected(option)) {
+        // if (!this.isOptionSelected(option)) {
           if (this.taggable && !this.optionExists(option)) {
             option = this.createOption(option)
           }
@@ -784,9 +831,11 @@
           } else {
             this.mutableValue = option
           }
-        }
+        // }
+
         this.onAfterSelect(option)
       },
+
       /**
        * De-select a given option.
        * @param  {Object|String} option
@@ -806,6 +855,7 @@
           this.mutableValue = null
         }
       },
+
       /**
        * Clears the currently selected value(s)
        * @return {void}
@@ -813,6 +863,7 @@
       clearSelection() {
         this.mutableValue = this.multiple ? [] : null
       },
+
       /**
        * Called from this.select after each selection.
        * @param  {Object|String} option
@@ -823,10 +874,12 @@
           this.open = !this.open
           // this.$refs.search.blur()
         }
+
         if (this.clearSearchOnSelect) {
           this.search = ''
         }
       },
+
       /**
        * Toggle the visibility of the dropdown menu.
        * @param  {Event} e
@@ -845,6 +898,7 @@
           }
         }
       },
+
       /**
        * Check if the given option is currently selected.
        * @param  {Object|String}  option
@@ -861,6 +915,7 @@
           })
           return selected
       },
+
       /**
        * Determine if two option objects are matching.
        *
@@ -878,6 +933,7 @@
         }
         return false;
       },
+
       /**
        * Finds an option from this.options
        * where option[this.index] matches
@@ -894,6 +950,7 @@
         })
         return value
       },
+
       /**
        * If there is any text in the search input, remove it.
        * Otherwise, blur the search input to close the dropdown.
@@ -906,6 +963,7 @@
           this.search = ''
         }
       },
+
       /**
        * Close the dropdown on blur.
        * @emits  {search:blur}
@@ -922,6 +980,7 @@
           // this.$emit('search:blur')
         }
       },
+
       /**
        * Open the dropdown on focus.
        * @emits  {search:focus}
@@ -931,6 +990,7 @@
         this.open = true
         this.$emit('search:focus')
       },
+
       /**
        * Delete the value on Delete keypress when there is no
        * text in the search input, & there's tags to delete
@@ -941,6 +1001,7 @@
           return this.multiple ? this.mutableValue.pop() : this.mutableValue = null
         }
       },
+
       /**
        * Determine if an option exists
        * within this.mutableOptions array.
@@ -950,6 +1011,7 @@
        */
       optionExists(option) {
         let exists = false
+
         this.mutableOptions.forEach(opt => {
           if (typeof opt === 'object' && opt[this.label] === option) {
             exists = true
@@ -957,8 +1019,10 @@
             exists = true
           }
         })
+
         return exists
       },
+
       /**
        * If push-tags is true, push the
        * given option to mutableOptions.
@@ -971,6 +1035,7 @@
           this.mutableOptions.push(option)
         }
       },
+
       /**
        * Event-Handler to help workaround IE11 (probably fixes 10 as well)
        * firing a `blur` event when clicking
@@ -982,7 +1047,9 @@
         this.mousedown = true
       }
     },
+
     computed: {
+
       /**
        * Classes to be output on .dropdown
        * @return {Object}
@@ -999,6 +1066,7 @@
           disabled: this.disabled
         }
       },
+
       /**
        * If search text should clear on blur
        * @return {Boolean} True when single and clearSearchOnSelect
@@ -1006,6 +1074,7 @@
       clearSearchOnBlur() {
         return this.clearSearchOnSelect && !this.multiple
       },
+
       /**
        * Return the current state of the
        * search input
@@ -1014,6 +1083,7 @@
       searching() {
         return !!this.search
       },
+
       /**
        * Return the current state of the
        * dropdown menu.
@@ -1022,6 +1092,7 @@
       dropdownOpen() {
         return this.noDrop ? false : this.open && !this.mutableLoading
       },
+
       /**
        * Return the placeholder string if it's set
        * & there is no value selected.
@@ -1032,6 +1103,7 @@
           return this.placeholder;
         }
       },
+
       /**
        * The currently displayed options, filtered
        * by the search elements value. If tagging
@@ -1050,6 +1122,7 @@
         }
         return options
       },
+
       /**
        * Check if there aren't any options selected.
        * @return {Boolean}
@@ -1061,8 +1134,10 @@
           }
           return ! this.valueAsArray.length
         }
+
         return true;
       },
+
       /**
        * Return the current value in array format.
        * @return {Array}
@@ -1073,8 +1148,10 @@
         } else if (this.mutableValue) {
           return [].concat(this.mutableValue)
         }
+
         return []
       },
+
       /**
        * Determines if the clear button should be displayed.
        * @return {Boolean}
@@ -1083,5 +1160,6 @@
         return !this.multiple && this.clearable && !this.open && this.mutableValue != null
       }
     },
+
   }
 </script>

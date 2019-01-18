@@ -820,8 +820,8 @@
        */
       onAfterSelect(option) {
         if (this.closeOnSelect) {
+          this.open = !this.open
           this.$refs.search.blur()
-          this.open = false
         }
         if (this.clearSearchOnSelect) {
           this.search = ''
@@ -979,7 +979,7 @@
        * @return {void}
        */
       onMousedown() {
-        this.mousedown = true
+        // this.mousedown = true
       }
     },
     computed: {

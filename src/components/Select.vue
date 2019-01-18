@@ -361,9 +361,9 @@
     </div>
 
     <transition :name="transition">
-      <ul ref="dropdownMenu" v-if="dropdownOpen" class="dropdown-menu" :style="{ 'max-height': maxHeight }" role="listbox">
-        <li role="option" v-for="(option, index) in filteredOptions" v-bind:key="index" :class="{ active: isOptionSelected(option), highlight: index === typeAheadPointer }" @click="select(option, index)">
-          <a>
+      <ul ref="dropdownMenu" v-if="dropdownOpen" class="dropdown-menu" :style="{ 'max-height': maxHeight }" role="listbox" @click="onMousedown">
+        <li role="option" v-for="(option, index) in filteredOptions" v-bind:key="index" :class="{ active: isOptionSelected(option), highlight: index === typeAheadPointer }">
+          <a @click="select(option, index)">
           <slot name="option" v-bind="(typeof option === 'object')?option:{[label]: option}">
             {{ getOptionLabel(option) }}
           </slot>
@@ -763,7 +763,6 @@
        * @return {void}
        */
       select(option, index) {
-        this.onMousedown();
         this.typeAheadPointer = index;
         if (!this.isOptionSelected(option)) {
           if (this.taggable && !this.optionExists(option)) {

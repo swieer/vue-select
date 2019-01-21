@@ -819,8 +819,8 @@
        * @return {void}
        */
       onAfterSelect(option) {
+        this.open = false;
         if (this.closeOnSelect) {
-          this.open = !this.open
           this.$refs.search.blur()
         }
         if (this.clearSearchOnSelect) {
@@ -918,9 +918,9 @@
           if (this.clearSearchOnBlur) {
             this.search = ''
           }
-          this.open = false
           this.$emit('search:blur')
         }
+        this.open = false
       },
       /**
        * Open the dropdown on focus.

@@ -928,6 +928,7 @@
        * @return {void}
        */
       onSearchFocus() {
+        this.mousedown = true;
         this.open = true
         this.$emit('search:focus')
       },
